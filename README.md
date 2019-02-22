@@ -1,4 +1,7 @@
 # Amharic Number to Word
+
+[![CircleCI](https://circleci.com/gh/mitiku1/AmharicNumber2Word.svg?style=svg)](https://circleci.com/gh/mitiku1/AmharicNumber2Word)
+
 <p>
 Converters Numbers from decimal representation to Amharic language word representation. The package supports numbers to 999,999,999,999,999. This are the numbers that could often comeup in real world. 
 </p>
