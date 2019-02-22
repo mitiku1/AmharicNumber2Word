@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from utils import Number2WordsConverter
+from am_num2number import Number2WordsConverter
 
 
 class Number2WordConverterTest(unittest.TestCase):
