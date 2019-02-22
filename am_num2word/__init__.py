@@ -39,10 +39,20 @@ class _Integer2WordsConverter(object):
 
     def to_words(self):
         output = ""
+        self.groups = self.remove_zeros()
         for i in range(len(self.groups)):
             if len(self.groups[i].to_words()) > 0:
                 output = self.groups[i].to_words()+" " + output
         return output.replace("  ", " ")
+    def remove_zeros(self):
+        if len(self.groups) < 2:
+            return self.groups
+        else:
+            output: List[Group] = []
+            for i in range(len(self.groups)):
+                if self.groups[i].to_words().strip() != "ዜሮ":
+                    output.append(self.groups[i])
+            return output
 
     def number2CommaSeperatedString(self, number: int) -> str:
         """Converts integer into comma seperated number	    

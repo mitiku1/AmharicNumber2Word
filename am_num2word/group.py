@@ -211,6 +211,8 @@ class Group(object):
             output +=  tens
         if len(ones) > 0:
             if len(tens) > 0:
+                output += " "
+            elif len(hundreds) > 0:
                 output+=" "
             output += ones
         power = self.get_power()
