@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/mitiku1/AmharicNumber2Word.svg?style=svg)](https://circleci.com/gh/mitiku1/AmharicNumber2Word)  [![PyPI version](https://badge.fury.io/py/am-num2word.svg)](https://badge.fury.io/py/am-num2word)
 [![image](https://secure.travis-ci.org/mitiku1/AmharicNumber2Word.png)](http://travis-ci.org/mitiku1/AmharicNumber2Word)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/mitiku1/AmharicNumber2Word.svg?columns=all)](https://waffle.io/mitiku1/AmharicNumber2Word)
 
 
 <p>
