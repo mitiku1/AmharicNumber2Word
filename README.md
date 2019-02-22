@@ -1,6 +1,8 @@
 # Amharic Number to Word
 
-[![CircleCI](https://circleci.com/gh/mitiku1/AmharicNumber2Word.svg?style=svg)](https://circleci.com/gh/mitiku1/AmharicNumber2Word)  [![PyPI version](https://badge.fury.io/py/am-num2word.svg)](https://badge.fury.io/py/am-num2word)
+[![CircleCI](https://circleci.com/gh/mitiku1/AmharicNumber2Word.svg?style=svg)](https://circleci.com/gh/mitiku1/AmharicNumber2Word)  
+[![PyPI version](https://badge.fury.io/py/am-num2word.svg)](https://badge.fury.io/py/am-num2word)
+[![PyPI version](https://img.shields.io/pypi/dm/am-num2word.svg)](https://img.shields.io/pypi/dm/am-num2word.svg)
 [![image](https://secure.travis-ci.org/mitiku1/AmharicNumber2Word.png)](http://travis-ci.org/mitiku1/AmharicNumber2Word)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/mitiku1/AmharicNumber2Word.svg?columns=all)](https://waffle.io/mitiku1/AmharicNumber2Word)
 [![Coverage Status](https://coveralls.io/repos/github/mitiku1/AmharicNumber2Word/badge.svg)](https://coveralls.io/github/mitiku1/AmharicNumber2Word)
