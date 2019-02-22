@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/mitiku1/AmharicNumber2Word.svg?style=svg)](https://circleci.com/gh/mitiku1/AmharicNumber2Word)  [![PyPI version](https://badge.fury.io/py/am-num2word.svg)](https://badge.fury.io/py/am-num2word)
 [![image](https://secure.travis-ci.org/mitiku1/AmharicNumber2Word.png)](http://travis-ci.org/mitiku1/AmharicNumber2Word)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/mitiku1/AmharicNumber2Word.svg?columns=all)](https://waffle.io/mitiku1/AmharicNumber2Word)
-
+[![Coverage Status](https://coveralls.io/repos/github/mitiku1/AmharicNumber2Word/badge.svg)](https://coveralls.io/github/mitiku1/AmharicNumber2Word)
 
 <p>
 Converters Numbers from decimal representation to Amharic language word representation. The package supports numbers to 999,999,999,999,999. This are the numbers that could often comeup in real world. 

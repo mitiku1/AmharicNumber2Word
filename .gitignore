@@ -5,3 +5,4 @@ dist/*
 *.pyc
 .mypy_cache/*
 __pycache__/*
+.coveralls.yml
