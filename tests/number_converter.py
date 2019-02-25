@@ -88,3 +88,29 @@ class Number2WordConverterTest(unittest.TestCase):
         self.assertEqual(converter.to_words(),
                          "አንድ ሚሊዮን ስድስት መቶ ሰባ አንድ ሺህ አምስት መቶ ሃያ")
 
+    def test_float_numbers(self):
+        converter: Number2WordsConverter = Number2WordsConverter(1000000.0)
+        self.assertEqual(converter.to_words(), "አንድ ሚሊዮን ነጥብ ዜሮ")
+        converter: Number2WordsConverter = Number2WordsConverter(1000001.12)
+        self.assertEqual(converter.to_words(), "አንድ ሚሊዮን አንድ ነጥብ አንድ ሁለት")
+        converter: Number2WordsConverter = Number2WordsConverter(1000010.4566, 3)
+        self.assertEqual(converter.to_words(), "አንድ ሚሊዮን አስር ነጥብ አራት አምስት ሰባት")
+
+        converter: Number2WordsConverter = Number2WordsConverter(1000010.4566, 4)
+        self.assertEqual(converter.to_words(),
+                         "አንድ ሚሊዮን አስር ነጥብ አራት አምስት ስድስት ስድስት")
+    def test_negative_Numbers(self):
+        converter: Number2WordsConverter = Number2WordsConverter(-1000520)
+        self.assertEqual(converter.to_words(), "ነጌትቭ አንድ ሚሊዮን አምስት መቶ ሃያ")
+
+        converter: Number2WordsConverter = Number2WordsConverter(-1001520)
+        self.assertEqual(converter.to_words(),
+                         "ነጌትቭ አንድ ሚሊዮን አንድ ሺህ አምስት መቶ ሃያ")
+
+        converter: Number2WordsConverter = Number2WordsConverter(-1071520)
+        self.assertEqual(converter.to_words(),
+                         "ነጌትቭ አንድ ሚሊዮን ሰባ አንድ ሺህ አምስት መቶ ሃያ")
+
+        converter: Number2WordsConverter = Number2WordsConverter(-1671520)
+        self.assertEqual(converter.to_words(),
+                         "ነጌትቭ አንድ ሚሊዮን ስድስት መቶ ሰባ አንድ ሺህ አምስት መቶ ሃያ")

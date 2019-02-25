@@ -4,18 +4,18 @@ from .group import amharic_ones
 
 
 class Number2WordsConverter(object):
-    def __init__(self, number: Union[float, int]):
+    def __init__(self, number: Union[float, int], significant_digits = 2):
         
         self.converter:Union[_Negative2WordsConverter, _Float2WordsConverter, _Integer2WordsConverter]
-        
+        self.significant_digits = significant_digits
         if not( isinstance(number, float) or isinstance(number, int)):
             raise ValueError("Number required found: %s" % str(number))
         elif number < 0:
-            self.converter = _Negative2WordsConverter(number)
+            self.converter = _Negative2WordsConverter(number, significant_digits=significant_digits)
         elif isinstance(number, int):
             self.converter = _Integer2WordsConverter(number)
         else:
-            self.converter = _Float2WordsConverter(number)
+            self.converter = _Float2WordsConverter(number, significant_digits)
         self.coma_separated = self.converter.coma_separated
 
     def to_words(self):
@@ -84,10 +84,10 @@ class _Integer2WordsConverter(object):
 
 
 class _Float2WordsConverter(object):
-    def __init__(self, number: float):
+    def __init__(self, number: float, significant_digits = 2):
         integer_part: int = int(number)
-
-        float_part = str(number - integer_part)
+        float_part = str(round(number - integer_part, significant_digits))
+        self.significant_digits = significant_digits
         if number == integer_part:
             self.float_part = "0"
         else:
@@ -104,11 +104,12 @@ class _Float2WordsConverter(object):
             g_index = len(group_list) - i
             group = Group(g, g_index)
             groups.append(Group(g, g_index))
-        self.coma_separated = coma_separated_numbers+"."+str(self.float_part)
+        self.coma_separated = coma_separated_numbers + "." + str(self.float_part)
         self.int_groups = groups
 
     def to_words(self):
         output = ""
+        self.int_groups = self.remove_zeros()
         for i in range(len(self.int_groups)):
             if len(self.int_groups[i].to_words()) > 0:
                 output = self.int_groups[i].to_words()+" " + output
@@ -123,6 +124,15 @@ class _Float2WordsConverter(object):
         else:
             return integer_part
 
+    def remove_zeros(self):
+        if len(self.int_groups) < 2:
+            return self.int_groups
+        else:
+            output: List[Group] = []
+            for i in range(len(self.int_groups)):
+                if self.int_groups[i].to_words().strip() != "ዜሮ":
+                    output.append(self.int_groups[i])
+            return output
     def get_float_part_words(self):
         output = ""
         for i in range(len(self.float_part)):
@@ -159,13 +169,14 @@ class _Float2WordsConverter(object):
 
 
 class _Negative2WordsConverter(object):
-    def __init__(self, number: Union[int, float]):
-        self.converter:Union[_Integer2WordsConverter, _Float2WordsConverter]
+    def __init__(self, number: Union[int, float], significant_digits=2):
+        self.converter: Union[_Integer2WordsConverter, _Float2WordsConverter]
+        number = -number
         if isinstance(number, int):
             self.converter: _Integer2WordsConverter = _Integer2WordsConverter(
                 number)
         elif isinstance(number, float):
-            self.converter: _Float2WordsConverter = _Float2WordsConverter(number)
+            self.converter: _Float2WordsConverter = _Float2WordsConverter(number, significant_digits=significant_digits)
         self.coma_separated = self.converter.coma_separated
     def to_words(self):
         return "ነጌትቭ " + self.converter.to_words()
