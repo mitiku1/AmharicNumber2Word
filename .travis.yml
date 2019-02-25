@@ -9,6 +9,7 @@ matrix:
 script:
 - python -m unittest
 - python setup.py sdist bdist_wheel
+- coverage run --source=tests setup.py test
 deploy:
   provider: pypi
   user: mitiku
