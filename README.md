@@ -8,7 +8,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/mitiku1/AmharicNumber2Word/badge.svg?branch=master)](https://coveralls.io/github/mitiku1/AmharicNumber2Word?branch=master)
 
 <p>
-Converters Numbers from decimal representation to Amharic language word representation. The package supports numbers to 999,999,999,999,999. This are the numbers that could often comeup in real world. 
+Converters Numbers from decimal representation to Amharic language word representation. The package supports numbers up-to 999,999,999,999,999. These are the numbers that could often comeup in real world. 
 </p>
 
 ### Usage
