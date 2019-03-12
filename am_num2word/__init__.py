@@ -4,25 +4,49 @@ from .group import amharic_ones
 
 
 class Number2WordsConverter(object):
-    def __init__(self, number: Union[float, int], significant_digits = 2):
-        
-        self.converter:Union[_Negative2WordsConverter, _Float2WordsConverter, _Integer2WordsConverter]
-        self.significant_digits = significant_digits
-        if not( isinstance(number, float) or isinstance(number, int)):
+  
+    def convert_positive_float(self, number, significant_digits=2):
+        if not(isinstance(number, float)):
+            raise ValueError("Float required required found: %s" % str(number))
+        converter = _Float2WordsConverter(number, significant_digits=significant_digits)
+        return converter.to_words(), converter.coma_separated
+    
+    def convert_positive_int(self, number):
+        if not (isinstance(number, int) and number >= 0):
+            raise ValueError("Positive integer required required found: %s" % str(number))
+        converter = _Integer2WordsConverter(number)
+        return converter.to_words(), converter.coma_separated
+    def convert_negative_number(self, number, significant_digits=2):
+        if not ((isinstance(number, int) or  isinstance(number, float)) and number<0):
+            raise ValueError(
+                "Negative number required found: %s" % str(number))
+        converter = _Negative2WordsConverter(number, significant_digits=significant_digits)
+        return converter.to_words(), converter.coma_separated
+    def convert(self, number, significant_digits=2):
+        """Converts number into  number's amharic word representation and comma seperated number	    
+        >>> converter = Number2WordsConverter()
+        >>> converter.convert(323)
+        ("አንድ ሺህ ሁለት መቶ ሰላሳ አራት", "1,234")
+        >>> converter.convert(2343.0)
+        ("ሁለት ሺህ ሶስት መቶ አርባ ሶስት ነጥብ ዜሮ", "2,343.0")
+        >>> converter.convert(-349343.934)
+        ("ነጌትቭ ሶስት መቶ አርባ ዘጠኝ ሺህ ሶስት መቶ አርባ ሶስት ነጥብ ዘጠኝ ሶስት", "349,343.93")
+        Arguments:
+            number {int} -- Integer to be converted
+        Returns:
+            str -- Comma separeted representation of the number
+        """
+        if not (isinstance(number, int) or isinstance(number, float)):
             raise ValueError("Number required found: %s" % str(number))
-        elif number < 0:
-            self.converter = _Negative2WordsConverter(number, significant_digits=significant_digits)
-        elif isinstance(number, int):
-            self.converter = _Integer2WordsConverter(number)
-        else:
-            self.converter = _Float2WordsConverter(number, significant_digits)
-        self.coma_separated = self.converter.coma_separated
-
-    def to_words(self):
-        return  self.converter.to_words().strip()
-        
             
-
+        if number < 0:
+            words, coma_separated = self.convert_negative_number(number)
+        else:
+            if isinstance(number, int):
+                words, coma_separated = self.convert_positive_int(number)
+            else:
+                words, coma_separated = self.convert_positive_float(number, significant_digits=significant_digits)
+        return words.strip(), coma_separated
 
 class _Integer2WordsConverter(object):
     def __init__(self, number: int):

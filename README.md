@@ -17,9 +17,10 @@ This package provides one class(`am_num2word.Number2WordsConverter`) to handle n
 import am_num2word
 
 number = 45232945075
-converter = am_num2word.Number2WordsConverter(number)
-print(converter.to_words()) # አርባ አምስት ቢሊዮን ሁለት መቶ ሰላሳ ሁለት ሚሊዮን ዘጠኝ መቶ አርባ አምስት ሺህ ሰባ አምስት
-print(converter.coma_separated # 45,232,945,075'
+converter = am_num2word.Number2WordsConverter()
+words, coma_separated = converter.convert(number)
+print(words) # አርባ አምስት ቢሊዮን ሁለት መቶ ሰላሳ ሁለት ሚሊዮን ዘጠኝ መቶ አርባ አምስት ሺህ ሰባ አምስት
+print(coma_separated) # 45,232,945,075'
 ```
 
 ### How to install
