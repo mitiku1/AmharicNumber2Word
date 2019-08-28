@@ -158,7 +158,7 @@ class _Float2WordsConverter(object):
         else:
             output: List[Group] = []
             for i in range(len(self.int_groups)):
-                if self.int_groups[i].to_words().strip() != "ዜሮ"  and self.groups[i].to_words().strip() != "duwwaa":
+                if self.int_groups[i].to_words().strip() != "ዜሮ"  and self.int_groups[i].to_words().strip() != "duwwaa":
                     output.append(self.int_groups[i])
             return output
     def get_float_part_words(self):
