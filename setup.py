@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="am_num2word",
-    version="1.0.0",
+    version="1.0.1",
     author="Mitiku Yohannes",
     author_email="se.mitiku.yohannes@gmail.com",
     description="Number to Amharic words representation package",

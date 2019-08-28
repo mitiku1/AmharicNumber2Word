@@ -4,6 +4,10 @@ amharic_ones = ["ዜሮ", "አንድ", "ሁለት", "ሶስት",
 amharic_tens = ["አስራ", "ሃያ", "ሰላሳ", "አርባ", "ሃምሳ", "ስልሳ", "ሰባ", "ሰማንያ", "ዘጠና"]
 amharic_powers = ["ሺህ", "ሚሊዮን", "ቢሊዮን", "ትሪሊዮን"]
 
+ao_ones = ["duwwaa", "tokko", "lama", "sadii", "afuri", "shani", "jaha", "torba", "saddeeti", "sagali"]
+ao_tens = ["Kudha", "digdami", "soddomi", "afurtami", "shantami", "jahatami", "torbaatami", "saddeetami", "sagaltami"]
+ao_powers = ["kuma", "kitila", "biliyoonii", "triliyoonii"]
+
 def is_digits(string: str) -> bool:
     """Checks if a given string is composed of only digits
     >>> is_digits("123")
@@ -54,7 +58,7 @@ class Group(object):
     ValueError: g_index should be non-negative integer
     """
 
-    def __init__(self, value: str, g_index: int):
+    def __init__(self, value: str, g_index: int, lang:str="am"):
         """Provides Group initialization
         
         Arguments:
@@ -64,6 +68,9 @@ class Group(object):
 
         self.value = value
         self.g_index = g_index
+        self._lang = lang
+        
+        assert self._lang in ["am", "ao"], "Currently supported languages are only: '%s' and '%s'"%("am", "ao")
 
     @property
     def value(self):
@@ -136,7 +143,11 @@ class Group(object):
         if self.value[-1] == "0" and len(self.value) > 1:
             return ""
         else:
-            return amharic_ones[int(self.value[-1])]
+            if self._lang=="am":
+                return amharic_ones[int(self.value[-1])]
+            elif self._lang == "ao":
+                return ao_ones[int(self.value[-1])]
+            
 
     def get_tens(self):
         """Get the tens place word representation of current group
@@ -166,8 +177,20 @@ class Group(object):
             return ""
         else:
             if self.value[-1] == "0" and self.value[-2] == "1":
-                return "አስር"
-            return amharic_tens[int(self.value[-2]) - 1]
+                if self._lang=="am":
+                    return "አስር"
+                elif self._lang=="ao":
+                    return "kudhan"
+            
+            if self._lang == "am":
+                return amharic_tens[int(self.value[-2]) - 1]
+            elif self._lang == "ao":
+                if self.value[-1] != "0":
+                    return ao_tens[int(self.value[-2]) - 1]
+                else:
+                    return ao_tens[int(self.value[-2]) - 1][:-1]+"a"
+
+
 
     def get_hundreds(self):
         """Get the hundreds place word representation of current group
@@ -189,7 +212,10 @@ class Group(object):
         if len(self.value) < 3:
             return ""
         else:
-            return amharic_ones[int(self.value[-3])] + " መቶ"
+            if self._lang=="am":
+                return amharic_ones[int(self.value[-3])] + " መቶ"
+            elif self._lang=="ao":
+                return "dhibba "+ ao_ones[int(self.value[-3])]+" fi"
 
     def to_words(self) -> str:
         """Converts current group into word representation
@@ -217,15 +243,24 @@ class Group(object):
             output += ones
         power = self.get_power()
         if len(power) > 0:
-            if output == "ዜሮ":
+            
+            if output == "ዜሮ" or output == "duwwaa":
                 output = ""
             else:
-                output = output + " " + power
+                if self._lang=="am":
+                    output = output + " " + power
+                elif self._lang == "ao":
+                    output = power + " " + output+" fi,"
+                    
 
         return output
     def get_power(self):
         if self.g_index == 0:
             return ""
         else:
-            return amharic_powers[self.g_index-1]
+            if self._lang=="am":
+                return amharic_powers[self.g_index - 1]
+            elif self._lang == "ao":
+                return ao_powers[self.g_index - 1]
+                
             
